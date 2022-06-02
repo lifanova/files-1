@@ -2,6 +2,8 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Created by Vera Lifanova
@@ -30,25 +32,33 @@ public class Main {
     }
 
     private static void createSrc(String path) {
+        List<String> files = Arrays.asList("Main.java", "Utils.java");
+
         // Создаем src
         File srcDir = createDir(path, "src");
+        // Создаем main, test
 
         // Создаем main и файлы Main.java, Utils.java
         File mainDir = createDir(srcDir.getAbsolutePath(), "main");
-        createFile(mainDir.getAbsolutePath(), "Main.java");
-        createFile(mainDir.getAbsolutePath(), "Utils.java");
+
+        for (String filename : files) {
+            createFile(mainDir.getAbsolutePath(), filename);
+        }
 
         // Создаем test
         createDir(srcDir.getAbsolutePath(), "test");
     }
 
     private static void createRes(String path) {
+        List<String> subDirs = Arrays.asList("drawables", "vectors", "icons");
+
         // Создаем res
         File resDir = createDir(path, "res");
         // Создаем drawables, vectors,icons
-        createDir(resDir.getAbsolutePath(), "drawables");
-        createDir(resDir.getAbsolutePath(), "vectors");
-        createDir(resDir.getAbsolutePath(), "icons");
+        for (String dirname : subDirs) {
+            createDir(resDir.getAbsolutePath(), dirname);
+        }
+
     }
 
     private static void createSaveGames(String path) {
